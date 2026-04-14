@@ -1,0 +1,6 @@
+[
+  { "id": 1, "contenido": "Electronica", "peso": 10.5, "destino": "Buenos Aires", "urgente": false },
+  { "id": 2, "contenido": "Alimentos",   "peso": 60.0, "destino": "Córdoba",       "urgente": false },
+  { "id": 3, "contenido": "Fragiles",    "peso": 8.0,  "destino": "Rosario",       "urgente": true  },
+  { "id": 4, "contenido": "Electronica", "peso": 30.0, "destino": "Mendoza",       "urgente": false }
+]
