@@ -10,6 +10,7 @@ public class App {
 
         ManejoArchivos.cargarEnCola("src/main/resources/inventario.json", centro);
 
+
         int opcion;
         do {
             System.out.println("\n=== Sistema de Logística ===");
