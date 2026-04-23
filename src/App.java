@@ -16,7 +16,7 @@ public class App {
         return new Paquete<>(id, contenido, peso, destino, urgente);
     }
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         PilaCamion<Paquete<String>> camion = new PilaCamion<>();
         ColaPrioridad<Paquete<String>> centro = new ColaPrioridad<>();
         Scanner sc = new Scanner(System.in);
@@ -82,5 +82,6 @@ public class App {
             }
         } while (opcion != 0);
             sc.close();
+            System.out.println("Saliendo del sistema");
     }
 }

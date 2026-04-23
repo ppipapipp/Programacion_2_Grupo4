@@ -1,6 +1,7 @@
 [
-  { "id": 1, "contenido": "Electronica", "peso": 10.5, "destino": "Buenos Aires", "urgente": false },
-  { "id": 2, "contenido": "Alimentos",   "peso": 60.0, "destino": "Córdoba",       "urgente": false },
-  { "id": 3, "contenido": "Fragiles",    "peso": 8.0,  "destino": "Rosario",       "urgente": true  },
-  { "id": 4, "contenido": "Electronica", "peso": 30.0, "destino": "Mendoza",       "urgente": false }
+  { "id": 1, "contenido": "Juguetes", "peso": 10.5, "destino": "Buenos Aires", "urgente": false },
+  { "id": 2, "contenido": "Masitas",   "peso": 6.0, "destino": "La Pampa",       "urgente": false },
+  { "id": 3, "contenido": "Copas de vidrio",    "peso": 8.0,  "destino": "Buenos Aires",       "urgente": true  },
+  { "id": 4, "contenido": "Celulares", "peso": 10.0, "destino": "Mendoza",       "urgente": false },
+  { "id": 5, "contenido": "Pulmón izquierdo", "peso": 0.6, "destino": "Usuhaia",       "urgente": true }
 ]
