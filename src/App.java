@@ -24,7 +24,7 @@ public class App {
 
 
 
-        ManejoArchivos.cargarEnCola("src/main/resources/inventario.json", centro);
+        ManejoArchivos.cargarEnCola("src/inventario.json", centro);
 
 
         int opcion;
@@ -68,12 +68,15 @@ public class App {
                     Paquete<String> pCentro = crearPaquete(sc, idContador++);
                     centro.encolar(pCentro);
                     System.out.println("Paquete encolado en centro logístico: " + pCentro);
+                    ManejoArchivos.guardarDesdeCola("src/inventario.json", centro); // ← NUEVO
                     break;
 
                 case 6:
                     Paquete<String> procesado = centro.desencolar();
-                    if (procesado != null)
+                    if (procesado != null) {
                         System.out.println("Procesando paquete: " + procesado);
+                        ManejoArchivos.guardarDesdeCola("src/inventario.json", centro); // ← NUEVO
+                    }
                     break;
 
                 case 7:
