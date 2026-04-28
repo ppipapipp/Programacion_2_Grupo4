@@ -37,7 +37,6 @@ public class PilaCamion<T> {
     // O(1)
     public T cima() {
         if (estaVacia()) {
-            System.out.println("El camión está vacío");
             return null;
         }
         return cima.dato;
@@ -50,6 +49,9 @@ public class PilaCamion<T> {
 
     // O(n)
     public void mostrar() {
+        if (estaVacia()) {
+            System.out.println("el camion esta vacio");
+        }
         Nodo<T> actual = cima;
         while (actual != null) {
             System.out.println(actual.dato);

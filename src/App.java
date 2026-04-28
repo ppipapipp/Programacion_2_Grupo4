@@ -57,7 +57,12 @@ public class App {
                     break;
 
                 case 3:
-                    System.out.println("Cima del camión: " + camion.cima());
+                    Paquete<String> cima = camion.cima();
+                    if (cima == null) {
+                        System.out.println("El camión está vacio");
+                    }else {
+                        System.out.println("Cima del camión: " + cima);
+                    }
                     break;
 
                 case 4:
