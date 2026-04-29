@@ -16,15 +16,16 @@ public class App {
         return new Paquete<>(id, contenido, peso, destino, urgente);
     }
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
         PilaCamion<Paquete<String>> camion = new PilaCamion<>();
         ColaPrioridad<Paquete<String>> centro = new ColaPrioridad<>();
         Scanner sc = new Scanner(System.in);
-        int idContador = 100;
 
 
 
-        ManejoArchivos.cargarEnCola("src/inventario.json", centro);
+        //NUEVO:
+        int maxId = ManejoArchivos.cargarEnCola("src/inventario.json", centro);
+        int idContador = maxId + 1;
 
 
         int opcion;

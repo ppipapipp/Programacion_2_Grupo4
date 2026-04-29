@@ -2,19 +2,30 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashSet;
+import java.util.Set;
 
-public class ManejoArchivos {
+public class  ManejoArchivos {
 
-    public static void cargarEnCola(String ruta, ColaPrioridad<Paquete<String>> cola) {
+    //MODIFICACIONES CON SET INTEGER E ID USADOS
+    public static int cargarEnCola(String ruta, ColaPrioridad<Paquete<String>> cola) {
+        int maxId = 0;
         try {
             String contenido = new String(Files.readAllBytes(Paths.get(ruta)));
             JSONArray array = new JSONArray(contenido);
+            Set<Integer> idsUsados = new HashSet<>();
             for (int i = 0; i < array.length(); i++) {
                 JSONObject obj = array.getJSONObject(i);
-                int id          = obj.getInt("id");
-                String tipo     = obj.getString("contenido");
-                double peso     = obj.getDouble("peso");
-                String destino  = obj.getString("destino");
+                int id = obj.getInt("id");
+                if (idsUsados.contains(id)) {
+                    System.out.println("ID duplicado ignorado dentro del JSON: " + id);
+                    continue;
+                }
+                idsUsados.add(id);
+                if (id > maxId) maxId = id;
+                String tipo = obj.getString("contenido");
+                double peso = obj.getDouble("peso");
+                String destino = obj.getString("destino");
                 boolean urgente = obj.getBoolean("urgente");
                 cola.encolar(new Paquete<>(id, tipo, peso, destino, urgente));
             }
@@ -22,6 +33,7 @@ public class ManejoArchivos {
         } catch (Exception e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
         }
+        return maxId;
     }
 
     // ← NUEVO: recorre ambas colas y serializa todo al archivo
