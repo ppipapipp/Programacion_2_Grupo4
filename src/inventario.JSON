@@ -10,10 +10,18 @@
   {
     "contenido": "pipiip",
     "peso": 23,
-    "procesado": false,
+    "procesado": true,
     "urgente": true,
     "id": 105,
     "destino": "pampa"
+  },
+  {
+    "contenido": "popopo",
+    "peso": 67,
+    "procesado": true,
+    "urgente": false,
+    "id": 107,
+    "destino": "paris"
   },
   {
     "contenido": "Electrónica",
@@ -38,5 +46,13 @@
     "urgente": false,
     "id": 104,
     "destino": "vrr"
+  },
+  {
+    "contenido": "papas",
+    "peso": 23,
+    "procesado": false,
+    "urgente": false,
+    "id": 106,
+    "destino": "fritas"
   }
 ]

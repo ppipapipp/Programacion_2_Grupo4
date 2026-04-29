@@ -61,10 +61,18 @@ public class ColaPrioridad<T extends Paquete<?>> {
         return frentePrio == null && frenteStd == null;
     }
 
-    // O(1)
+    // O(1) - pero ahora O(n) para saltar procesados
     public T frente() {
-        if (frentePrio != null) return frentePrio.dato;
-        if (frenteStd != null) return frenteStd.dato;
+        Nodo<T> actual = frentePrio;
+        while (actual != null) {
+            if (!actual.dato.procesado) return actual.dato;
+            actual = actual.siguiente;
+        }
+        actual = frenteStd;
+        while (actual != null) {
+            if (!actual.dato.procesado) return actual.dato;
+            actual = actual.siguiente;
+        }
         return null;
     }
 
