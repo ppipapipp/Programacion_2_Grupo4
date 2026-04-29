@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 
 public class App {
@@ -13,7 +12,7 @@ public class App {
         String destino = sc.nextLine();
         System.out.print("¿Urgente? (s/n): ");
         boolean urgente = sc.nextLine().equalsIgnoreCase("s");
-        return new Paquete<>(id, contenido, peso, destino, urgente);
+        return new Paquete<>(id, contenido, peso, destino, urgente, false);
     }
 
     public static void main(String[] args) {
@@ -35,7 +34,7 @@ public class App {
             System.out.println("2. Deshacer última carga (desapilar)");
             System.out.println("3. Ver cima del camion");
             System.out.println("4. Mostrar camion completo");
-            System.out.println("5. Agregar paquete al centro de distribución");
+            System.out.println("5. Transferir paquete del camion al centro de distribución");
             System.out.println("6. Procesar siguiente paquete del centro");
             System.out.println("7. Mostrar centro de distribución");
             System.out.println("0. Salir");
@@ -71,17 +70,24 @@ public class App {
                     break;
 
                 case 5:
-                    Paquete<String> pCentro = crearPaquete(sc, idContador++);
-                    centro.encolar(pCentro);
-                    System.out.println("Paquete encolado en centro logístico: " + pCentro);
-                    ManejoArchivos.guardarDesdeCola("src/inventario.json", centro); // ← NUEVO
+                    if (!camion.estaVacia()) {
+                        Paquete<String> pCentro = camion.desapilar();
+                        centro.encolar(pCentro);
+                        System.out.println("Paquete transferido del camión al centro de distribución: " + pCentro);
+                        ManejoArchivos.guardarDesdeCola("src/inventario.json", centro); // ← NUEVO
+                    } else {
+                        System.out.println("No hay paquetes en el camión para transferir.");
+                    }
                     break;
 
                 case 6:
-                    Paquete<String> procesado = centro.desencolar();
+                    Paquete<String> procesado = centro.frente();
                     if (procesado != null) {
+                        procesado.procesado = true;
                         System.out.println("Procesando paquete: " + procesado);
-                        ManejoArchivos.guardarDesdeCola("src/inventario.json", centro); // ← NUEVO
+                        ManejoArchivos.guardarDesdeCola("src/inventario.json", centro);
+                    } else {
+                        System.out.println("No hay paquetes para procesar en el centro de distribución.");
                     }
                     break;
 

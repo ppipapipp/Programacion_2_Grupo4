@@ -27,7 +27,8 @@ public class  ManejoArchivos {
                 double peso = obj.getDouble("peso");
                 String destino = obj.getString("destino");
                 boolean urgente = obj.getBoolean("urgente");
-                cola.encolar(new Paquete<>(id, tipo, peso, destino, urgente));
+                boolean procesado = obj.optBoolean("procesado", false);
+                cola.encolar(new Paquete<>(id, tipo, peso, destino, urgente, procesado));
             }
             System.out.println("Inventario cargado correctamente.");
         } catch (Exception e) {
@@ -67,6 +68,7 @@ public class  ManejoArchivos {
         obj.put("peso",      p.peso);
         obj.put("destino",   p.destino);
         obj.put("urgente",   p.urgente);
+        obj.put("procesado", p.procesado);
         return obj;
     }
 }

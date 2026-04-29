@@ -1,4 +1,3 @@
-
 // Cola con dos carriles internos: prioritarios y estándar
 // encolar:   O(1)
 // desencolar: O(1)
@@ -62,18 +61,25 @@ public class ColaPrioridad<T extends Paquete<?>> {
         return frentePrio == null && frenteStd == null;
     }
 
+    // O(1)
+    public T frente() {
+        if (frentePrio != null) return frentePrio.dato;
+        if (frenteStd != null) return frenteStd.dato;
+        return null;
+    }
+
     // O(n)
     public void mostrar() {
         System.out.println("-- Prioritarios --");
         Nodo<T> actual = frentePrio;
         while (actual != null) {
-            System.out.println(actual.dato);
+            if (!actual.dato.procesado) System.out.println(actual.dato);
             actual = actual.siguiente;
         }
         System.out.println("-- Estándar --");
         actual = frenteStd;
         while (actual != null) {
-            System.out.println(actual.dato);
+            if (!actual.dato.procesado) System.out.println(actual.dato);
             actual = actual.siguiente;
         }
     }

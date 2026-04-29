@@ -1,16 +1,42 @@
 [
   {
-    "contenido": "Palos",
-    "peso": 31,
-    "urgente": false,
-    "id": 2,
-    "destino": "Uruguay"
+    "contenido": "s",
+    "peso": 4,
+    "procesado": true,
+    "urgente": true,
+    "id": 100,
+    "destino": "s"
   },
   {
-    "contenido": "Ojotas",
-    "peso": 21,
+    "contenido": "pipiip",
+    "peso": 23,
+    "procesado": false,
+    "urgente": true,
+    "id": 105,
+    "destino": "pampa"
+  },
+  {
+    "contenido": "Electrónica",
+    "peso": 12.5,
+    "procesado": false,
     "urgente": false,
-    "id": 3,
-    "destino": "Catamarca"
+    "id": 1,
+    "destino": "Buenos Aires"
+  },
+  {
+    "contenido": "prueba",
+    "peso": 4,
+    "procesado": false,
+    "urgente": false,
+    "id": 101,
+    "destino": "si"
+  },
+  {
+    "contenido": "pipi",
+    "peso": 5,
+    "procesado": false,
+    "urgente": false,
+    "id": 104,
+    "destino": "vrr"
   }
 ]
