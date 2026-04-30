@@ -37,12 +37,12 @@ public class  ManejoArchivos {
         return maxId;
     }
 
-    // ← NUEVO: recorre ambas colas y serializa todo al archivo
+    // Recorre ambas colas y serializa todo el archivo
     public static void guardarDesdeCola(String ruta, ColaPrioridad<Paquete<String>> cola) {
         try {
             JSONArray array = new JSONArray();
 
-            // Recorremos sin desencolar — directamente por los nodos internos
+            // Recorremos sin desencolar - directamente por los nodos internos
             Nodo<Paquete<String>> actual = cola.frentePrio;
             while (actual != null) {
                 array.put(paqueteAJson(actual.dato));

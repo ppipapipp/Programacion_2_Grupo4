@@ -3,15 +3,40 @@ import java.util.Scanner;
 public class App {
 
     private static Paquete<String> crearPaquete(Scanner sc, int id) {
+
+        String input;
+        boolean urgente;
+        double peso;
+
         System.out.print("Contenido: ");
         String contenido = sc.nextLine();
-        System.out.print("Peso: ");
-        double peso = sc.nextDouble();
-        sc.nextLine();
+
+        do {
+            System.out.print("Peso: ");
+            while (!sc.hasNextDouble()) {
+                System.out.println("Error: ingresá un número válido.");
+                sc.next();
+                System.out.print("Peso: ");
+            }
+            peso = sc.nextDouble();
+            sc.nextLine();
+            if (peso <= 0) {
+                System.out.println("El peso debe ser mayor a 0.");
+            }
+        } while (peso <= 0);
+
         System.out.print("Destino: ");
         String destino = sc.nextLine();
-        System.out.print("¿Urgente? (s/n): ");
-        boolean urgente = sc.nextLine().equalsIgnoreCase("s");
+
+        do {
+            System.out.print("¿Urgente? (s/n): ");
+            input = sc.nextLine();
+            if (!input.equalsIgnoreCase("s") && !input.equalsIgnoreCase("n")) {
+                System.out.println("Ingresá solo 's' o 'n'.");
+            }
+        } while (!input.equalsIgnoreCase("s") && !input.equalsIgnoreCase("n"));
+        urgente = input.equalsIgnoreCase("s");
+
         return new Paquete<>(id, contenido, peso, destino, urgente, false);
     }
 
@@ -20,16 +45,14 @@ public class App {
         ColaPrioridad<Paquete<String>> centro = new ColaPrioridad<>();
         Scanner sc = new Scanner(System.in);
 
-
-
         //NUEVO:
         int maxId = ManejoArchivos.cargarEnCola("src/inventario.json", centro);
         int idContador = maxId + 1;
 
-
         int opcion;
+
         do {
-            System.out.println("\n=== Sistema de Logística ===");
+            System.out.println("\nSISTEMA DE LOGÍSTICA ----------------------------------------");
             System.out.println("1. Cargar paquete al camion");
             System.out.println("2. Deshacer última carga (desapilar)");
             System.out.println("3. Ver cima del camion");
@@ -39,6 +62,12 @@ public class App {
             System.out.println("7. Mostrar centro de distribución");
             System.out.println("0. Salir");
             System.out.print("Opción: ");
+
+            while (!sc.hasNextInt()) {
+                System.out.println("Error: ingresá un número válido.");
+                System.out.print("Opción: ");
+                sc.next();
+            }
             opcion = sc.nextInt();
             sc.nextLine();
 
@@ -94,6 +123,9 @@ public class App {
                 case 7:
                     centro.mostrar();
                     break;
+
+                default:
+                    System.out.println("Opción inválida");
             }
         } while (opcion != 0);
             sc.close();

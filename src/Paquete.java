@@ -22,6 +22,6 @@ public class Paquete<T> {
 
     @Override
     public String toString() {
-        return "[ID:" + id + " | " + contenido + " | " + peso + "kg | " + destino + (urgente ? " | URGENTE" : "") + (procesado ? " | PROCESADO" : "") + "]";
+        return "ID:" + id + " | " + contenido + " | " + peso + "kg | " + destino + (urgente ? " | URGENTE" : "") + (procesado ? " | PROCESADO" : "") ;
     }
 }

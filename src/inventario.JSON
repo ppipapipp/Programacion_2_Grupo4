@@ -1,58 +1,90 @@
 [
   {
-    "contenido": "s",
-    "peso": 4,
+    "contenido": "Notebook 15 pulgadas",
+    "peso": 2.3,
     "procesado": true,
     "urgente": true,
-    "id": 100,
-    "destino": "s"
-  },
-  {
-    "contenido": "pipiip",
-    "peso": 23,
-    "procesado": true,
-    "urgente": true,
-    "id": 105,
-    "destino": "pampa"
-  },
-  {
-    "contenido": "popopo",
-    "peso": 67,
-    "procesado": true,
-    "urgente": false,
-    "id": 107,
-    "destino": "paris"
-  },
-  {
-    "contenido": "Electrónica",
-    "peso": 12.5,
-    "procesado": false,
-    "urgente": false,
-    "id": 1,
+    "id": 2001,
     "destino": "Buenos Aires"
   },
   {
-    "contenido": "prueba",
-    "peso": 4,
-    "procesado": false,
-    "urgente": false,
-    "id": 101,
-    "destino": "si"
+    "contenido": "Celular gama media",
+    "peso": 0.4,
+    "procesado": true,
+    "urgente": true,
+    "id": 2003,
+    "destino": "Rosario"
   },
   {
-    "contenido": "pipi",
-    "peso": 5,
-    "procesado": false,
-    "urgente": false,
-    "id": 104,
-    "destino": "vrr"
+    "contenido": "Auriculares inalámbricos",
+    "peso": 0.3,
+    "procesado": true,
+    "urgente": true,
+    "id": 2006,
+    "destino": "Mar del Plata"
   },
   {
-    "contenido": "papas",
-    "peso": 23,
+    "contenido": "Cafetera automática",
+    "peso": 4.2,
+    "procesado": false,
+    "urgente": true,
+    "id": 2009,
+    "destino": "Tucumán"
+  },
+  {
+    "contenido": "Lámpara",
+    "peso": 2,
+    "procesado": false,
+    "urgente": true,
+    "id": 2011,
+    "destino": "Mendoza"
+  },
+  {
+    "contenido": "Zapatillas deportivas",
+    "peso": 1.1,
+    "procesado": true,
+    "urgente": false,
+    "id": 2002,
+    "destino": "Córdoba"
+  },
+  {
+    "contenido": "Libros (pack x3)",
+    "peso": 1.8,
+    "procesado": true,
+    "urgente": false,
+    "id": 2004,
+    "destino": "Mendoza"
+  },
+  {
+    "contenido": "Monitor 24 pulgadas",
+    "peso": 3.6,
     "procesado": false,
     "urgente": false,
-    "id": 106,
-    "destino": "fritas"
+    "id": 2005,
+    "destino": "La Plata"
+  },
+  {
+    "contenido": "Ropa (campera de invierno)",
+    "peso": 1.5,
+    "procesado": false,
+    "urgente": false,
+    "id": 2007,
+    "destino": "Bariloche"
+  },
+  {
+    "contenido": "Tablet 10 pulgadas",
+    "peso": 0.7,
+    "procesado": true,
+    "urgente": false,
+    "id": 2008,
+    "destino": "Salta"
+  },
+  {
+    "contenido": "Kit de herramientas",
+    "peso": 5.8,
+    "procesado": true,
+    "urgente": false,
+    "id": 2010,
+    "destino": "Neuquén"
   }
 ]
