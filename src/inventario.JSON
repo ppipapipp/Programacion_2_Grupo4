@@ -5,7 +5,8 @@
     "procesado": true,
     "urgente": true,
     "id": 2001,
-    "destino": "Buenos Aires"
+    "destino": "Buenos Aires",
+    "zonaDestino": "Centro"
   },
   {
     "contenido": "Celular gama media",
@@ -13,78 +14,34 @@
     "procesado": true,
     "urgente": true,
     "id": 2003,
-    "destino": "Rosario"
+    "destino": "Rosario",
+    "zonaDestino": "Centro"
   },
   {
-    "contenido": "Auriculares inalámbricos",
-    "peso": 0.3,
-    "procesado": true,
-    "urgente": true,
-    "id": 2006,
-    "destino": "Mar del Plata"
-  },
-  {
-    "contenido": "Cafetera automática",
-    "peso": 4.2,
+    "contenido": "Sillas",
+    "peso": 10,
     "procesado": false,
     "urgente": true,
-    "id": 2009,
-    "destino": "Tucumán"
-  },
-  {
-    "contenido": "Lámpara",
-    "peso": 2,
-    "procesado": false,
-    "urgente": true,
-    "id": 2011,
-    "destino": "Mendoza"
-  },
-  {
-    "contenido": "Zapatillas deportivas",
-    "peso": 1.1,
-    "procesado": true,
-    "urgente": false,
-    "id": 2002,
-    "destino": "Córdoba"
-  },
-  {
-    "contenido": "Libros (pack x3)",
-    "peso": 1.8,
-    "procesado": true,
-    "urgente": false,
-    "id": 2004,
-    "destino": "Mendoza"
-  },
-  {
-    "contenido": "Monitor 24 pulgadas",
-    "peso": 3.6,
-    "procesado": false,
-    "urgente": false,
     "id": 2005,
-    "destino": "La Plata"
-  },
-  {
-    "contenido": "Ropa (campera de invierno)",
-    "peso": 1.5,
-    "procesado": false,
-    "urgente": false,
-    "id": 2007,
-    "destino": "Bariloche"
+    "destino": "Buenos Aires",
+    "zonaDestino": "Centro"
   },
   {
     "contenido": "Tablet 10 pulgadas",
-    "peso": 0.7,
+    "peso": 0.8,
     "procesado": true,
     "urgente": false,
-    "id": 2008,
-    "destino": "Salta"
+    "id": 2002,
+    "destino": "Córdoba",
+    "zonaDestino": "Norte"
   },
   {
-    "contenido": "Kit de herramientas",
-    "peso": 5.8,
-    "procesado": true,
+    "contenido": "Monitor 24 pulgadas",
+    "peso": 3.5,
+    "procesado": false,
     "urgente": false,
-    "id": 2010,
-    "destino": "Neuquén"
+    "id": 2004,
+    "destino": "Mendoza",
+    "zonaDestino": "Sur"
   }
 ]

@@ -1,0 +1,9 @@
+[
+  { "origen": 100, "destino": 50,  "distancia": 300 },
+  { "origen": 100, "destino": 25,  "distancia": 400 },
+  { "origen": 50,  "destino": 150, "distancia": 400 },
+  { "origen": 150, "destino": 120, "distancia": 1200 },
+  { "origen": 150, "destino": 75,  "distancia": 700 },
+  { "origen": 75,  "destino": 200, "distancia": 1600 },
+  { "origen": 100, "destino": 150, "distancia": 700 }
+]

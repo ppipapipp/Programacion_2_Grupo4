@@ -1,0 +1,9 @@
+[
+  { "id": 100, "nombre": "Buenos Aires" },
+  { "id": 50,  "nombre": "Rosario" },
+  { "id": 150, "nombre": "Córdoba" },
+  { "id": 25,  "nombre": "Mar del Plata" },
+  { "id": 75,  "nombre": "Mendoza" },
+  { "id": 120, "nombre": "Tucumán" },
+  { "id": 200, "nombre": "Bariloche" }
+]

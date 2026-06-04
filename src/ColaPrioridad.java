@@ -91,4 +91,57 @@ public class ColaPrioridad<T extends Paquete<?>> {
             actual = actual.siguiente;
         }
     }
+
+    // O(n) - Lista paquetes pendientes sin procesados, en orden de prioridad
+    // Criterio: Prioritarios primero (FIFO), luego estándar (FIFO)
+    public void listarPendientes() {
+        boolean hayPendientes = false;
+
+        System.out.println("\n=== PAQUETES PENDIENTES EN CENTRO DE DISTRIBUCIÓN ===");
+        System.out.println("(Ordenados por prioridad: prioritarios primero, luego estándar)");
+        System.out.println("-".repeat(70));
+        System.out.printf("%-10s %-15s %-12s %-15s%n", "ORDEN", "ID", "PESO", "URGENTE/CAPITAL");
+        System.out.println("-".repeat(70));
+
+        int orden = 1;
+
+        // Listar prioritarios no procesados
+        Nodo<T> actual = frentePrio;
+        while (actual != null) {
+            if (!actual.dato.procesado) {
+                System.out.printf("%-10d %-15d %-12.2f %-15s%n",
+                        orden,
+                        actual.dato.id,
+                        actual.dato.peso,
+                        (actual.dato.urgente ? "SÍ (urgente)" : "SÍ (CAPITAL)")
+                );
+                orden++;
+                hayPendientes = true;
+            }
+            actual = actual.siguiente;
+        }
+
+        // Listar estándar no procesados
+        actual = frenteStd;
+        while (actual != null) {
+            if (!actual.dato.procesado) {
+                System.out.printf("%-10d %-15d %-12.2f %-15s%n",
+                        orden,
+                        actual.dato.id,
+                        actual.dato.peso,
+                        "No"
+                );
+                orden++;
+                hayPendientes = true;
+            }
+            actual = actual.siguiente;
+        }
+
+        if (!hayPendientes) {
+            System.out.println("No hay paquetes pendientes.");
+        }
+        System.out.println("-".repeat(70));
+    }
+
+
 }
