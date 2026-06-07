@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class App {
@@ -46,7 +47,7 @@ public class App {
         Scanner sc = new Scanner(System.in);
 
         //NUEVO:
-        int maxId = ManejoArchivos.cargarEnCola("src/inventario.json", centro);
+        int maxId = ManejoArchivos.cargarEnCola("inventario.json", centro);
         int idContador = maxId + 1;
 
         int opcion;
@@ -103,7 +104,7 @@ public class App {
                         Paquete<String> pCentro = camion.desapilar();
                         centro.encolar(pCentro);
                         System.out.println("Paquete transferido del camión al centro de distribución: " + pCentro);
-                        ManejoArchivos.guardarDesdeCola("src/inventario.json", centro); // ← NUEVO
+                        ManejoArchivos.guardarDesdeCola("inventario.json", centro); // ← NUEVO
                     } else {
                         System.out.println("No hay paquetes en el camión para transferir.");
                     }
@@ -130,5 +131,28 @@ public class App {
         } while (opcion != 0);
             sc.close();
             System.out.println("Saliendo del sistema");
+
+        /* PRUEBAS CREACION DE ABB Y BUSQUEDAS
+        
+        Dentro de App.main() o en una clase de prueba temporal
+        ABB arbolDepositos = new ABB();
+        arbolDepositos.insertar(50, "Hub Central Buenos Aires");
+        arbolDepositos.insertar(20, "Depósito Córdoba");
+        arbolDepositos.insertar(80, "Depósito Rosario");
+        arbolDepositos.insertar(35, "Depósito Mendoza");
+
+        arbolDepositos.mostrarInorden();
+
+         Buscar un depósito
+        NodoDeposito encontrado = arbolDepositos.buscar(20);
+        if (encontrado != null) {
+            System.out.println("Encontrado: " + encontrado);
+            // Actualizar auditoría
+            encontrado.setVisitado(true);
+            encontrado.setFechaUltimaAuditoria(LocalDateTime.now());
+        }
+            else {
+                System.out.println("Depósito no encontrado.");
+            }*/
     }
 }
