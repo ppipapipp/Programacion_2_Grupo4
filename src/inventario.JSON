@@ -5,8 +5,7 @@
     "procesado": true,
     "urgente": true,
     "id": 2001,
-    "destino": "Buenos Aires",
-    "zonaDestino": "Centro"
+    "destino": "Buenos Aires"
   },
   {
     "contenido": "Celular gama media",
@@ -14,17 +13,15 @@
     "procesado": true,
     "urgente": true,
     "id": 2003,
-    "destino": "Rosario",
-    "zonaDestino": "Centro"
+    "destino": "Rosario"
   },
   {
     "contenido": "Sillas",
     "peso": 10,
-    "procesado": false,
+    "procesado": true,
     "urgente": true,
     "id": 2005,
-    "destino": "Buenos Aires",
-    "zonaDestino": "Centro"
+    "destino": "Buenos Aires"
   },
   {
     "contenido": "Tablet 10 pulgadas",
@@ -32,8 +29,7 @@
     "procesado": true,
     "urgente": false,
     "id": 2002,
-    "destino": "Córdoba",
-    "zonaDestino": "Norte"
+    "destino": "Córdoba"
   },
   {
     "contenido": "Monitor 24 pulgadas",
@@ -41,7 +37,6 @@
     "procesado": false,
     "urgente": false,
     "id": 2004,
-    "destino": "Mendoza",
-    "zonaDestino": "Sur"
+    "destino": "Mendoza"
   }
 ]

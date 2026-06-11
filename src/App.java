@@ -61,75 +61,51 @@ public class App {
         }
     }
 
-    public static void main(String[] args) {
+    private static int leerOpcion(Scanner sc) {
+        while (!sc.hasNextInt()) {
+            System.out.println("Error: ingresá un número válido.");
+            System.out.print("Opción: ");
+            sc.next();
+        }
+        int op = sc.nextInt();
+        sc.nextLine();
+        return op;
+    }
 
-        PilaCamion<Paquete<String>> camion = new PilaCamion<>(5, 500.0);
-        ColaPrioridad<Paquete<String>> centro = new ColaPrioridad<>();
-        ABBDepositos abb = new ABBDepositos();
-        GrafoDepositos grafo = new GrafoDepositos();
-        Scanner sc = new Scanner(System.in);
+    // ── Submenú 1: Gestión de carga ──────────────────────────────────────────
 
-        int maxId = ManejoArchivos.cargarEnCola("src/inventario.json", centro, indice);
-        int idContador = maxId + 1;
-
-
-        ManejoArchivos.cargarDepositos("src/depositos.json", abb, grafo);
-        ManejoArchivos.cargarRutas("src/rutas.json", grafo);
-
+    private static void menuCarga(Scanner sc, PilaCamion<Paquete<String>> camion,
+                                  ColaPrioridad<Paquete<String>> centro, int[] idContador) {
         int opcion;
-
         do {
-            System.out.println("\nSISTEMA DE LOGÍSTICA ----------------------------------------");
-            System.out.println("-- Gestión de carga --");
-            System.out.println("1.  Cargar paquete al camion");
+            System.out.println("\nGESTIÓN DE CARGA ------------------------------------");
+            System.out.println("1.  Cargar paquete al camión");
             System.out.println("2.  Deshacer última carga (desapilar)");
-            System.out.println("3.  Ver cima del camion");
-            System.out.println("4.  Mostrar camion completo");
-            System.out.println("5.  Transferir paquete del camion al centro de distribución");
+            System.out.println("3.  Ver cima del camión");
+            System.out.println("4.  Mostrar camión completo");
+            System.out.println("5.  Transferir paquete al centro de distribución");
             System.out.println("6.  Procesar siguiente paquete del centro");
             System.out.println("7.  Mostrar centro de distribución");
             System.out.println("8.  Buscar paquete por ID");
-            System.out.println("9.  Modificar paquete por ID");
-            System.out.println("10. Ver total de paquetes creados");
-            System.out.println("11. Listar paquetes pendientes en el centro");
-            System.out.println("-- Gestión de depósitos --");
-            System.out.println("12. Agregar depósito");
-            System.out.println("13. Buscar depósito por ID");
-            System.out.println("14. Listar todos los depósitos (in-orden)");
-            System.out.println("15. Auditar depósitos (post-orden)");
-            System.out.println("16. Reporte de depósitos por nivel");
-            System.out.println("17. Ver depósitos de un nivel específico");
-            System.out.println("-- Red de rutas --");
-            System.out.println("18. Mostrar red de depósitos");
-            System.out.println("19. Agregar ruta entre depósitos");
-            System.out.println("20. Calcular ruta mínima entre dos depósitos");
-            System.out.println("0.  Salir");
+            System.out.println("0.  Volver al menú principal");
             System.out.print("Opción: ");
 
-            while (!sc.hasNextInt()) {
-                System.out.println("Error: ingresá un número válido.");
-                System.out.print("Opción: ");
-                sc.next();
-            }
-
-            opcion = sc.nextInt();
-            sc.nextLine();
+            opcion = leerOpcion(sc);
 
             switch (opcion) {
 
                 case 1:
-                    if (indice.containsKey(idContador)) {
+                    if (indice.containsKey(idContador[0])) {
                         System.out.println("Error: el ID ya está en uso.");
                         break;
                     }
 
-                    Paquete<String> pCamion = crearPaquete(sc, idContador);
-
+                    Paquete<String> pCamion = crearPaquete(sc, idContador[0]);
                     boolean agregado = camion.apilar(pCamion);
 
                     if (agregado) {
                         indice.put(pCamion.id, pCamion);
-                        idContador++;
+                        idContador[0]++;
                         System.out.println("Paquete cargado en camión: " + pCamion);
                     } else {
                         System.out.println("No se pudo cargar el paquete (camión lleno).");
@@ -145,7 +121,7 @@ public class App {
                 case 3:
                     Paquete<String> cima = camion.cima();
                     if (cima == null) {
-                        System.out.println("El camión está vacío");
+                        System.out.println("El camión está vacío.");
                     } else {
                         System.out.println("Cima del camión: " + cima);
                     }
@@ -183,68 +159,59 @@ public class App {
 
                 case 8:
                     System.out.print("Ingrese ID a buscar: ");
-                    int idBuscar = sc.nextInt();
-                    sc.nextLine();
+                    int idBuscar = leerOpcion(sc);
 
                     Paquete<String> encontrado = buscarPorId(idBuscar);
-
                     if (encontrado != null) {
                         System.out.println("Paquete encontrado: " + encontrado);
                     } else {
-                        System.out.println("No existe un paquete con ese ID");
+                        System.out.println("No existe un paquete con ese ID.");
                     }
                     break;
 
-                case 9:
-                    System.out.print("Ingrese ID del paquete: ");
-                    int idMod = sc.nextInt();
-                    sc.nextLine();
-
-                    System.out.print("Nuevo destino: ");
-                    String nuevoDestino = sc.nextLine();
-
-                    String inputMod;
-                    boolean urgenteMod;
-
-                    do {
-                        System.out.print("¿Urgente? (s/n): ");
-                        inputMod = sc.nextLine();
-                    } while (!inputMod.equalsIgnoreCase("s") && !inputMod.equalsIgnoreCase("n"));
-
-                    urgenteMod = inputMod.equalsIgnoreCase("s");
-
-                    modificarPaquete(idMod, nuevoDestino, urgenteMod);
-                    ManejoArchivos.guardarDesdeCola("src/inventario.json", centro);
+                case 0:
                     break;
 
-                case 10:
-                    System.out.println("Total de paquetes creados: " + Paquete.getTotalPaquetesCreados());
-                    break;
+                default:
+                    System.out.println("Opción inválida.");
+            }
 
-                case 11:
-                    centro.listarPendientes();
-                    break;
+        } while (opcion != 0);
+    }
 
-                // ── Iteración 2: ABB ──────────────────────────────────────────
+    // ── Submenú 2: Gestión de depósitos ─────────────────────────────────────
 
-                case 12:
+    private static void menuDepositos(Scanner sc, ABBDepositos abb, GrafoDepositos grafo) {
+        int opcion;
+        do {
+            System.out.println("\nGESTIÓN DE DEPÓSITOS --------------------------------");
+            System.out.println("1.  Agregar depósito");
+            System.out.println("2.  Buscar depósito por ID");
+            System.out.println("3.  Listar todos los depósitos (in-orden)");
+            System.out.println("4.  Auditar depósitos (post-orden)");
+            System.out.println("5.  Reporte de depósitos por nivel");
+            System.out.println("6.  Ver depósitos de un nivel específico");
+            System.out.println("0.  Volver al menú principal");
+            System.out.print("Opción: ");
+
+            opcion = leerOpcion(sc);
+
+            switch (opcion) {
+
+                case 1:
                     System.out.print("ID del depósito: ");
-                    int idNuevo = sc.nextInt();
-                    sc.nextLine();
+                    int idNuevo = leerOpcion(sc);
                     System.out.print("Nombre del depósito: ");
                     String nombreNuevo = sc.nextLine();
 
                     abb.insertar(idNuevo, nombreNuevo);
-
-                    // También lo agregamos al grafo para poder conectarlo luego
                     grafo.agregarDeposito(idNuevo, nombreNuevo);
                     System.out.println("Depósito agregado.");
                     break;
 
-                case 13:
+                case 2:
                     System.out.print("ID del depósito a buscar: ");
-                    int idABB = sc.nextInt();
-                    sc.nextLine();
+                    int idABB = leerOpcion(sc);
 
                     NodoArbol dep = abb.buscar(idABB);
                     if (dep != null) {
@@ -254,11 +221,11 @@ public class App {
                     }
                     break;
 
-                case 14:
+                case 3:
                     abb.listarTodos();
                     break;
 
-                case 15:
+                case 4:
                     if (abb.estaVacio()) {
                         System.out.println("No hay depósitos cargados.");
                     } else {
@@ -266,52 +233,120 @@ public class App {
                     }
                     break;
 
-                case 16:
+                case 5:
                     abb.reportePorNivel();
                     break;
 
-                case 17:
+                case 6:
                     System.out.print("Ingrese el número de nivel: ");
-                    int nivelConsulta = sc.nextInt();
-                    sc.nextLine();
+                    int nivelConsulta = leerOpcion(sc);
                     abb.depositosEnNivel(nivelConsulta);
                     break;
 
-                // ── Iteración 2: Grafo ────────────────────────────────────────
+                case 0:
+                    break;
 
-                case 18:
+                default:
+                    System.out.println("Opción inválida.");
+            }
+
+        } while (opcion != 0);
+    }
+
+    // ── Submenú 3: Red de rutas ──────────────────────────────────────────────
+
+    private static void menuRutas(Scanner sc, GrafoDepositos grafo) {
+        int opcion;
+        do {
+            System.out.println("\nRED DE RUTAS ----------------------------------------");
+            System.out.println("1.  Mostrar red de depósitos");
+            System.out.println("2.  Agregar ruta entre depósitos");
+            System.out.println("3.  Calcular ruta mínima entre dos depósitos");
+            System.out.println("0.  Volver al menú principal");
+            System.out.print("Opción: ");
+
+            opcion = leerOpcion(sc);
+
+            switch (opcion) {
+
+                case 1:
                     grafo.mostrarRed();
                     break;
 
-                case 19:
+                case 2:
                     System.out.print("ID depósito origen: ");
-                    int idOrigen = sc.nextInt();
+                    int idOrigen = leerOpcion(sc);
                     System.out.print("ID depósito destino: ");
-                    int idDestino = sc.nextInt();
+                    int idDestino = leerOpcion(sc);
                     System.out.print("Distancia (km): ");
-                    int km = sc.nextInt();
-                    sc.nextLine();
+                    int km = leerOpcion(sc);
 
                     grafo.agregarRuta(idOrigen, idDestino, km);
                     System.out.println("Ruta agregada.");
                     break;
 
-                case 20:
+                case 3:
                     System.out.print("ID depósito origen: ");
-                    int desde = sc.nextInt();
+                    int desde = leerOpcion(sc);
                     System.out.print("ID depósito destino: ");
-                    int hasta = sc.nextInt();
-                    sc.nextLine();
+                    int hasta = leerOpcion(sc);
 
                     grafo.distanciaMinima(desde, hasta);
                     break;
 
                 case 0:
-                    System.out.println("Saliendo del sistema...");
                     break;
 
                 default:
-                    System.out.println("Opción inválida");
+                    System.out.println("Opción inválida.");
+            }
+
+        } while (opcion != 0);
+    }
+
+    // ── Menú principal ───────────────────────────────────────────────────────
+
+    public static void main(String[] args) {
+
+        PilaCamion<Paquete<String>> camion = new PilaCamion<>(5, 500.0);
+        ColaPrioridad<Paquete<String>> centro = new ColaPrioridad<>();
+        ABBDepositos abb = new ABBDepositos();
+        GrafoDepositos grafo = new GrafoDepositos();
+        Scanner sc = new Scanner(System.in);
+
+        int maxId = ManejoArchivos.cargarEnCola("src/inventario.json", centro, indice);
+        int[] idContador = { maxId + 1 };
+
+        ManejoArchivos.cargarDepositos("src/depositos.json", abb, grafo);
+        ManejoArchivos.cargarRutas("src/rutas.json", grafo);
+
+        int opcion;
+
+        do {
+            System.out.println("\nSISTEMA DE LOGÍSTICA ----------------------------------------");
+            System.out.println("1.  Gestión de carga");
+            System.out.println("2.  Gestión de depósitos");
+            System.out.println("3.  Red de rutas");
+            System.out.println("0.  Salir");
+            System.out.print("Opción: ");
+
+            opcion = leerOpcion(sc);
+
+            switch (opcion) {
+                case 1:
+                    menuCarga(sc, camion, centro, idContador);
+                    break;
+                case 2:
+                    menuDepositos(sc, abb, grafo);
+                    break;
+                case 3:
+                    menuRutas(sc, grafo);
+                    break;
+                case 0:
+                    System.out.println("Saliendo del sistema...");
+                    break;
+                default:
+                    System.out.println("Opción inválida.");
             }
 
         } while (opcion != 0);
