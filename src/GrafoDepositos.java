@@ -147,4 +147,16 @@ public class GrafoDepositos {
     public boolean estaVacio() {
         return adyacencia.isEmpty();
     }
+
+    // Metodo para contar hojas recursivamente con un int contarHojas(Nodo raiz)
+    public int contarHojas(Nodo raiz) {
+        if (raiz == null) {
+            return 0;
+        }
+        if (raiz.izquierda == null && raiz.derecha == null) {
+            return 1;
+        }
+        return contarHojas(raiz.izquierda) + contarHojas(raiz.derecha);
+    }
+
 }
