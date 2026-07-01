@@ -164,5 +164,10 @@ public class ABBDepositos {
     public boolean estaVacio() {
         return raiz == null;
     }
-    
+    // metodo que cuente los depositos sin auditar en los ultimos 30 dias, usando los metodos ya implementados
+    public int contarDepositosSinAuditar() {
+        return contarDepositosSinAuditarRec(raiz);
+
+    }
+
 }
